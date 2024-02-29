@@ -7,7 +7,7 @@ from qasync import asyncClose, asyncSlot
 from .api import ApiWidget
 
 
-class MyWidget(QtWidgets.QWidget):
+class RenderWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
@@ -24,7 +24,7 @@ class MyWidget(QtWidgets.QWidget):
         self.layout.addWidget(self.text)
         self.layout.addWidget(self.button)
         self.layout.addWidget(self.view)
-        # self.layout.addWidget(self.api)
+        self.layout.addWidget(self.api)
 
         self.button.clicked.connect(self.magic)
         self.api.sig.connect(self.update_url)

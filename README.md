@@ -11,11 +11,13 @@ Selenium service.
 Features(to be implemented)
 ------
 
-1. Executing JavaScript directly, like `pyexecjs`.
+1. Execute JavaScript directly, like `pyexecjs`.
     - Pass a piece of script and execute directly.
     - Register a script to be called later via name or id.
     - Create virtual env with custom patches.
 2. Use JS RPC to call the algorithm on host page.
     - Execute functions directly within the page context.
     - Register additional scripts to the page.
+3. Docker image for one-click install as a service.
+4. Call wkenv as a headless browser, without the `webdriver` attributes.
 
