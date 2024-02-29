@@ -14,7 +14,7 @@ class MyWidget(QtWidgets.QWidget):
         self.hello = ["Hallo Welt", "Hei maailma", "Hola Mundo", "Привет мир"]
 
         self.view = QtWebEngineWidgets.QWebEngineView()
-        self.view.load(QtCore.QUrl("https://www.xiaohongshu.com/explore/649131330000000013036f02"))
+        self.view.load(QtCore.QUrl("https://abrahamjuliot.github.io/creepjs/"))
 
         self.button = QtWidgets.QPushButton("Click me!")
         self.text = QtWidgets.QLabel("Hello World", alignment=QtCore.Qt.AlignCenter)

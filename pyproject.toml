@@ -5,7 +5,10 @@ authors = [{ name = "Yifei Kong", email = "kong@yifei.me" }]
 description = "WebKit based JavaScript environment for executing API-signing algorithms, such as jsvmp."
 license = { file = "LICENSE" }
 dependencies = [
-    "pyside6"
+    "pyside6",
+    "qasync",
+    "setproctitle",
+    "aiohttp",
 ]
 readme = "README.md"
 requires-python = ">=3.8"
