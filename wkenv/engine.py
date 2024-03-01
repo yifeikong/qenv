@@ -2,7 +2,9 @@
 import random
 
 from PySide6 import QtCore, QtWidgets, QtWebEngineWidgets
-from qasync import asyncClose, asyncSlot
+from PySide6.QtCore import QUrl
+from PySide6.QtWidgets import QHBoxLayout, QLineEdit, QVBoxLayout, QPushButton
+# from qasync import asyncClose, asyncSlot
 
 from .api import ApiWidget
 
@@ -11,28 +13,34 @@ class RenderWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.hello = ["Hallo Welt", "Hei maailma", "Hola Mundo", "Привет мир"]
-
         self.view = QtWebEngineWidgets.QWebEngineView()
-        self.view.load(QtCore.QUrl("https://abrahamjuliot.github.io/creepjs/"))
+        self.view.load(QUrl("https://abrahamjuliot.github.io/creepjs/"))
 
-        self.button = QtWidgets.QPushButton("Click me!")
-        self.text = QtWidgets.QLabel("Hello World", alignment=QtCore.Qt.AlignCenter)
+        self.goto_button = QPushButton("Go")
+        self.address_bar = QLineEdit()
         self.api = ApiWidget()
 
-        self.layout = QtWidgets.QVBoxLayout(self)
-        self.layout.addWidget(self.text)
-        self.layout.addWidget(self.button)
-        self.layout.addWidget(self.view)
-        self.layout.addWidget(self.api)
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
 
-        self.button.clicked.connect(self.magic)
+        header = QHBoxLayout()
+        header.addWidget(self.address_bar)
+        header.addWidget(self.goto_button)
+
+        layout.addLayout(header)
+        layout.addWidget(self.view)
+        layout.addWidget(self.api)
+
+        self.setLayout(layout)
+
+        self.goto_button.clicked.connect(self.on_goto_clicked)
+        self.address_bar.returnPressed.connect(self.on_goto_clicked)
         self.api.sig.connect(self.update_url)
 
     @QtCore.Slot()
-    def magic(self):
-        self.text.setText(random.choice(self.hello))
+    def on_goto_clicked(self):
+        self.view.load(QUrl(self.address_bar.text()))
 
     @QtCore.Slot()
     def update_url(self):
-        self.view.load(QtCore.QUrl("https://www.zhihu.com"))
+        self.view.load(QUrl("https://www.zhihu.com"))

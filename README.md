@@ -21,3 +21,7 @@ Features(to be implemented)
 3. Docker image for one-click install as a service.
 4. Call wkenv as a headless browser, without the `webdriver` attributes.
 
+Acknowledgements
+------
+
+PySide6 tutorial: https://www.pythonguis.com/pyqt6/
