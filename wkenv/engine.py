@@ -2,7 +2,7 @@
 import random
 
 from PySide6 import QtCore, QtWidgets, QtWebEngineWidgets
-from PySide6.QtCore import QUrl
+from PySide6.QtCore import QUrl, Slot
 from PySide6.QtWidgets import QHBoxLayout, QLineEdit, QVBoxLayout, QPushButton
 # from qasync import asyncClose, asyncSlot
 
@@ -13,8 +13,8 @@ class RenderWidget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.view = QtWebEngineWidgets.QWebEngineView()
-        self.view.load(QUrl("https://abrahamjuliot.github.io/creepjs/"))
+        self.webview = QtWebEngineWidgets.QWebEngineView()
+        self.webview.load(QUrl("https://abrahamjuliot.github.io/creepjs/"))
 
         self.goto_button = QPushButton("Go")
         self.address_bar = QLineEdit()
@@ -28,19 +28,29 @@ class RenderWidget(QtWidgets.QWidget):
         header.addWidget(self.goto_button)
 
         layout.addLayout(header)
-        layout.addWidget(self.view)
+        layout.addWidget(self.webview)
         layout.addWidget(self.api)
 
         self.setLayout(layout)
 
+        # User action signals
         self.goto_button.clicked.connect(self.on_goto_clicked)
         self.address_bar.returnPressed.connect(self.on_goto_clicked)
+
+        # Page events
+        self.webview.urlChanged.connect(self.on_url_changed)
+
         self.api.sig.connect(self.update_url)
 
-    @QtCore.Slot()
-    def on_goto_clicked(self):
-        self.view.load(QUrl(self.address_bar.text()))
 
-    @QtCore.Slot()
+    @Slot()
+    def on_goto_clicked(self):
+        self.webview.load(QUrl(self.address_bar.text()))
+
+    @Slot()
+    def on_url_changed(self):
+        self.address_bar.setText(self.webview.url().toString())
+
+    @Slot()
     def update_url(self):
-        self.view.load(QUrl("https://www.zhihu.com"))
+        self.webview.load(QUrl("https://www.zhihu.com"))
