@@ -11,7 +11,7 @@ Selenium service.
 Features(to be implemented)
 ------
 
-1. Execute JavaScript directly, like `pyexecjs`.
+1. Execute JavaScript directly, like `pyexecjs`, but via API.
     - Pass a piece of script and execute directly.
     - Register a script to be called later via name or id.
     - Create virtual env with custom patches.
