@@ -20,6 +20,8 @@ Features(to be implemented)
     - Register additional scripts to the page.
 3. Docker image for one-click install as a service.
 4. Call wkenv as a headless browser, without the `webdriver` attributes.
+    - Integrate common anti-detect scripts from [Undetected chromedriver](https://github.com/ultrafunkamsterdam/undetected-chromedriver)
+    - Generate random values for JS based fingerprints.
 
 Acknowledgements
 ------
